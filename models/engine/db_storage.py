@@ -88,3 +88,20 @@ class DBStorage:
             Remove private session attribute
         '''
         self.__session.close()
+
+    def get(self, cls, id):
+
+        ''' Return an object based on cls name or id, None if no object
+        '''
+        cls_dict = self.all(cls)
+        id = cls + '.' + id
+        obj = cls_dict.get(id)
+        return(obj)
+
+    def count(self, cls=None):
+        ''' Returns number of objects with cls name
+        '''
+        count = 0
+        cls_dict = self.all(cls)
+        count = len(cls_dict)
+        return(count)
