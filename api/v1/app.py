@@ -15,7 +15,6 @@ def teardown(self):
     storage.close()
 
 @app.errorhandler(404)
-
 def errorhandler(error):
     """ Returns status 404 Not found
     """
