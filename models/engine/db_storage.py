@@ -96,7 +96,9 @@ class DBStorage:
         cls_dict = self.all(cls)
         id = cls + '.' + id
         obj = cls_dict.get(id)
-        return(obj)
+        if obj == str(id):
+            return(obj)
+        return None
 
     def count(self, cls=None):
         ''' Returns number of objects with cls name
