@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""returns the status of the api"""
+
+
 from api.v1.views import app_views
 from flask import jsonify, make_response
 from models import storage
