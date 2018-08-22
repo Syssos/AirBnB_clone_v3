@@ -85,7 +85,9 @@ class FileStorage:
         cls_dict = self.all(cls)
         new_id = cls + '.' + id
         obj = cls_dict.get(new_id)
-        return obj
+        if obj == str(id):
+            return obj
+        return None
 
     def count(self, cls=None):
         ''' Returns the num of objects in class
