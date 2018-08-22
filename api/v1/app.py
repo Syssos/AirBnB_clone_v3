@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Flask App for AirBnB clone
+""" Flask App for AirBnB clone"""
 from flask import Flask, Blueprint, make_response, jsonify
 from api.v1.views import app_views
 from models import storage
@@ -22,7 +22,7 @@ def teardown(self):
 def errorhandler(error):
     """ Returns status 404 Not found
     """
-    return make_response(jsonify({'error': 'Not found'}), 404)
+    return jsonify({'error': 'Not found'}), 404
 
 if __name__ == "__main__":
     var = {'host': '0.0.0.0', 'port': 5000}
