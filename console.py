@@ -53,14 +53,14 @@ class HBNBCommand(cmd.Cmd):
                         value = value.replace("_", " ")
                         try:
                             value = eval(value)
-                        except:
+                        except BaseException:
                             pass
                         setattr(new_instance, key, value)
                 except (ValueError, IndexError):
                     pass
             new_instance.save()
             print(new_instance.id)
-        except:
+        except BaseException:
             print("** class doesn't exist **")
             return
 
@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
         try:
             for key, val in objects.items():
                 obj_list.append(val)
-        except:
+        except BaseException:
             pass
         print(obj_list)
 
@@ -197,7 +197,7 @@ class HBNBCommand(cmd.Cmd):
             return
         for key, val in objects.items():
             if len(args) != 0:
-                if type(val) is eval(args):
+                if isinstance(val, eval(args)):
                     obj_list.append(val)
             else:
                 obj_list.append(val)
@@ -217,8 +217,9 @@ class HBNBCommand(cmd.Cmd):
             cmd_arg = args[0] + " " + args[2]
             func = functions[args[1]]
             func(cmd_arg)
-        except:
+        except BaseException:
             print("*** Unknown syntax:", args[0])
+
 
 if __name__ == "__main__":
     '''
