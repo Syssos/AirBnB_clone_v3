@@ -21,6 +21,7 @@ def get_states():
         emli.append(value.to_dict())
     return jsonify(emli)
 
+
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_state_id(state_id):
     """ Returns info for <state_id>
@@ -31,12 +32,14 @@ def get_state_id(state_id):
     except:
         abort(404)
 
-@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
+
+@app_views.route('/states/<state_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def delete_state_id(state_id):
     """ Returns info for <state_id>
     """
     try:
-        var_all= storage.all('State')
+        var_all = storage.all('State')
         var_id = 'State.' + state_id
         var_obj = var_all.get(var_id)
         var_obj.delete()
@@ -44,6 +47,7 @@ def delete_state_id(state_id):
         return jsonify({}), 200
     except:
         abort(404)
+
 
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
 def post_state():
@@ -62,6 +66,7 @@ def post_state():
     except:
         abort(404)
 
+
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def put_state(state_id):
     """ Changes content in state
@@ -72,7 +77,7 @@ def put_state(state_id):
             return jsonify({'error': 'Not a JSON'}), 400
         elif sobj is None:
             abort(404)
-            
+
         new_cont = request.get_json()
         tmp = {'id', 'created_at', 'updated_at'}
         for key, value in new_cont.items():

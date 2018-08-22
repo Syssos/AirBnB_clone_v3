@@ -1,4 +1,5 @@
- #!/usr/bin/python3
+#!/usr/bin/python3
+# Flask App for AirBnB clone
 from flask import Flask, Blueprint, make_response, jsonify
 from api.v1.views import app_views
 from models import storage
@@ -9,11 +10,13 @@ app = Flask(__name__)
 app.register_blueprint(app_views)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
+
 @app.teardown_appcontext
 def teardown(self):
     """ calls close to close session
     """
     storage.close()
+
 
 @app.errorhandler(404)
 def errorhandler(error):
