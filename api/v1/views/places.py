@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""City objects that handles all default RestFul API actions"""
+"""Place objects that handles all default RestFul API actions"""
 
 
 from api.v1.views import app_views
@@ -31,7 +31,7 @@ def get_places(city_id):
 
 @app_views.route('/places/<place_id>', methods=['GET'], strict_slashes=False)
 def get_place(place_id):
-    """ Retrieves a City object
+    """ Retrieves a  Place object
     """
     vari = storage.get('Place', place_id)
     if vari is None:
@@ -42,12 +42,12 @@ def get_place(place_id):
 @app_views.route('/places/<place_id>', methods=['DELETE'],
                  strict_slashes=False)
 def delete_place(place_id):
-    """ Returns info for <state_id>
+    """ Delete place
     """
     vari = storage.get('Place', place_id)
     if vari is None:
         abort(404)
-    var_obj.delete()
+    vari.delete()
     storage.save()
     return jsonify({}), 200
 
@@ -55,7 +55,7 @@ def delete_place(place_id):
 @app_views.route('/cities/<city_id>/places', methods=['POST'],
                  strict_slashes=False)
 def post_place(city_id):
-    """ Adds a new state to State
+    """ Adds a new place
     """
     citi = storage.get('City', city_id)
     if citi is None:
@@ -77,7 +77,7 @@ def post_place(city_id):
 
 @app_views.route('/places/<place_id>', methods=['PUT'], strict_slashes=False)
 def put_place(place_id):
-    """ Changes content in state
+    """ Put some content to place
     """
     sobj = storage.get('Place', place_id)
     if sobj is None:
@@ -85,9 +85,7 @@ def put_place(place_id):
     if not request.json:
         return jsonify({'error': 'Not a JSON'}), 400
     new_cont = request.get_json()
-    tmp = ['id', 'user_id', 'city_id', 'created_at', 'updated_at']
     for key, value in new_cont.items():
-        if key not in tmp:
-            setattr(sobj, key, value)
-            sobj.save()
+        setattr(sobj, key, value)
+        sobj.save()
     return jsonify(sobj.to_dict()), 200
