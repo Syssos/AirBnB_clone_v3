@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ Flask App for AirBnB clone"""
-from flask import Flask, Blueprint, make_response, jsonify
+from flask import Flask, Blueprint, jsonify
 from api.v1.views import app_views
 from models import storage
 from os import getenv
@@ -26,8 +26,6 @@ def errorhandler(error):
 
 if __name__ == "__main__":
     var = {'host': '0.0.0.0', 'port': 5000}
-    if getenv('HBNB_API_PORT'):
-        var['port'] = getenv('HBNB_API_PORT')
-    if getenv('HBNB_API_HOST'):
-        var['host'] = getenv('HBNB_API_HOST')
-    app.run(host=var.get('host'), port=var.get('port'), threaded=True)
+    hosts = os.getenv("HBNB_API_HOST", default="0.0.0.0")
+    ports = int(os.getenv("HBNB_API_PORT", default="5000"))
+    app.run(host=hosts, port=ports, threaded=True)
