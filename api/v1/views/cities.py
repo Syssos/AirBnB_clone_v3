@@ -19,15 +19,15 @@ def get_cities(state_id):
     """ returns state info
     """
     if state_id:
-        try:
-            emli = []
-            stateinfo = storage.all('City')
-            for key, value in stateinfo.items():
-                citi = value.to_dict()
-                if citi.get('state_id') == state_id:
-                    emli.append(citi)
+        emli = []
+        stateinfo = storage.all('City')
+        for key, value in stateinfo.items():
+            citi = value.to_dict()
+            if citi.get('state_id') == state_id:
+                emli.append(citi)
+        if len(emli) > 0:
             return jsonify(emli)
-        except BaseException:
+        else:
             abort(404)
 
 
