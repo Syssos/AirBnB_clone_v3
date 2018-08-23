@@ -93,9 +93,8 @@ class DBStorage:
 
         ''' Return an object based on cls name or id, None if no object
         '''
-        cls_dict = self.all(cls)
-        id = cls + '.' + id
-        obj = cls_dict.get(id)
+        cls_dict = self.all(cls).values()
+        obj = cls_dict:
         if obj == str(id):
             return(obj)
         return None
