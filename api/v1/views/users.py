@@ -78,9 +78,7 @@ def put_user(user_id):
     if not request.json:
         return jsonify({'error': 'Not a JSON'}), 400
     new_cont = request.get_json()
-    tmp = {'id', 'created_at', 'updated_at'}
     for key, value in new_cont.items():
-        if key not in tmp:
-            setattr(sobj, key, value)
-            sobj.save()
+        setattr(sobj, key, value)
+        sobj.save()
     return jsonify(sobj.to_dict()), 200
