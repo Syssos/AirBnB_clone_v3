@@ -18,17 +18,15 @@ from models import User
 def get_cities(state_id):
     """ returns state info
     """
-    if state_id:
-        emli = []
-        stateinfo = storage.all('City')
-        for key, value in stateinfo.items():
-            citi = value.to_dict()
-            if citi.get('state_id') == state_id:
-                emli.append(citi)
-        if len(emli) > 0:
-            return jsonify(emli)
-        else:
-            abort(404)
+    if storage.get('State', state_id) is None:
+        abort(404)
+    emli = []
+    stateinfo = storage.all('City')
+    for key, value in stateinfo.items():
+        citi = value.to_dict()
+        if citi.get('state_id') == state_id:
+            emli.append(citi)
+    return jsonify(emli)
 
 
 @app_views.route('/cities/<city_id>', methods=['GET'], strict_slashes=False)
