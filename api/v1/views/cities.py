@@ -18,6 +18,8 @@ from models import User
 def get_cities(state_id):
     """ returns state info
     """
+    if state_id is None:
+        abort(404)
     emli = []
     stateinfo = storage.all('City')
     for key, value in stateinfo.items():
