@@ -11,25 +11,22 @@ from models import Place
 from models import Review
 from models import State
 from models import User
-from models import base_model
 
 
-@app_views.route(
-    '/states/<state_id>/cities',
-    methods=['GET'],
-    strict_slashes=False)
+@app_views.route('/states/<state_id>/cities', methods=['GET'],
+                 strict_slashes=False)
 def get_cities(state_id):
     """ returns state info
     """
-    try:
-        emli = []
-        stateinfo = storage.all('City')
-        for key, value in stateinfo.items():
-            citi = value.to_dict()
-            if citi.get('state_id') == state_id:
-                emli.append(citi)
+    emli = []
+    stateinfo = storage.all('City')
+    for key, value in stateinfo.items():
+        citi = value.to_dict()
+        if citi.get('state_id') == state_id:
+            emli.append(citi)
+    if len(emli) > 0:
         return jsonify(emli)
-    except BaseException:
+    else:
         abort(404)
 
 
