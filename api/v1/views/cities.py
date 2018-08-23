@@ -18,17 +18,18 @@ from models import User
 def get_cities(state_id):
     """ returns state info
     """
-    if state_id is None:
-        abort(404)
-    emli = []
-    stateinfo = storage.all('City')
-    for key, value in stateinfo.items():
-        citi = value.to_dict()
-        if citi.get('state_id') == state_id:
-            emli.append(citi)
-    if len(emli) > 0:
-        return jsonify(emli)
-    else:
+    try:
+        emli = []
+        stateinfo = storage.all('City')
+        for key, value in stateinfo.items():
+            citi = value.to_dict()
+            if citi.get('state_id') == state_id:
+                emli.append(citi)
+        if len(emli) > 0:
+            return jsonify(emli)
+        else:
+            abort(404)
+    except BaseException:
         abort(404)
 
 
