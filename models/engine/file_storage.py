@@ -84,7 +84,7 @@ class FileStorage:
         '''
         cls_dict = self.all(cls)
         val = "{}.{}".format(str(cls), str(id))
-        obj = cls_dict.get(var)
+        obj = cls_dict.get(val)
         return obj
 
     def count(self, cls=None):

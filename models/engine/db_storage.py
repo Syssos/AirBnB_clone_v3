@@ -94,9 +94,9 @@ class DBStorage:
         ''' Return an object based on cls name or id, None if no object
         '''
         cls_dict = self.all(cls).values()
-        obj = cls_dict:
-        if obj == str(id):
-            return(obj)
+        for obj in cls_dict:
+            if obj.id == str(id):
+                return(obj)
         return None
 
     def count(self, cls=None):
