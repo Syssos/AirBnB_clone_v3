@@ -85,7 +85,9 @@ def put_place(place_id):
     if not request.json:
         return jsonify({'error': 'Not a JSON'}), 400
     new_cont = request.get_json()
+    tmp = ['id', 'user_id', 'city_id', 'created_at', 'updated_at']
     for key, value in new_cont.items():
-        setattr(sobj, key, value)
-        sobj.save()
+        if key not in tmp:
+            setattr(sobj, key, value)
+            sobj.save()
     return jsonify(sobj.to_dict()), 200
