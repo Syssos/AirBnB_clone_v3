@@ -21,7 +21,7 @@ class FileStorage:
         if cls is None:
             return self.__objects
 
-        if cls != "":
+        if cls is not None and cls != "":
             for k, v in self.__objects.items():
                 if cls == k.split(".")[0]:
                     new_dict[k] = v
@@ -83,8 +83,8 @@ class FileStorage:
         ''' Returns objects if in class
         '''
         cls_dict = self.all(cls)
-        new_id = cls + '.' + id
-        obj = cls_dict.get(new_id)
+        val = "{}.{}".format(str(cls), str(id))
+        obj = cls_dict.get(var)
         return obj
 
     def count(self, cls=None):

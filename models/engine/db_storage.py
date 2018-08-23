@@ -38,7 +38,7 @@ class DBStorage:
         '''
         db_dict = {}
 
-        if cls != "":
+        if cls is not None and cls != "":
             objs = self.__session.query(models.classes[cls]).all()
             for obj in objs:
                 key = "{}.{}".format(obj.__class__.__name__, obj.id)
@@ -93,15 +93,14 @@ class DBStorage:
 
         ''' Return an object based on cls name or id, None if no object
         '''
-        cls_dict = self.all(cls)
-        id = cls + '.' + id
-        obj = cls_dict.get(id)
-        return(obj)
+        cls_dict = self.all(cls).values()
+        obj = cls_dict:
+        if obj == str(id):
+            return(obj)
+        return None
 
     def count(self, cls=None):
         ''' Returns number of objects with cls name
         '''
-        count = 0
         cls_dict = self.all(cls)
-        count = len(cls_dict)
-        return(count)
+        return(len(cls_dict))
