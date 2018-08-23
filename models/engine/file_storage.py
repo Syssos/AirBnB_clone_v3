@@ -82,9 +82,8 @@ class FileStorage:
     def get(self, cls, id):
         ''' Returns objects if in class
         '''
-        cls_dict = self.all(cls)
-        new_id = cls + '.' + id
-        obj = cls_dict.get(new_id)
+        cls_dict = self.all(cls).values()
+        obj = cls_dict1
         if obj == str(id):
             return obj
         return None
