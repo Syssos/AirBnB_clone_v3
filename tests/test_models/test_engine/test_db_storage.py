@@ -125,7 +125,7 @@ class test_DBStorage(unittest.TestCase):
         self.assertTrue(isinstance(storage, DBStorage))
 
     def test_dbstorage_count(self):
-        ''' 
+        '''
            Test to check if count funtion works
         '''
         storage.reload()
