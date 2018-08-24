@@ -69,6 +69,8 @@ class test_DBStorage(unittest.TestCase):
         self.assertTrue(hasattr(self.dbstorage, "save"))
         self.assertTrue(hasattr(self.dbstorage, "delete"))
         self.assertTrue(hasattr(self.dbstorage, "reload"))
+        self.assertTrue(hasattr(self.dbstorage, "get"))
+        self.assertTrue(hasattr(self.dbstorage, "count"))
 
     def test_dbstorage_all(self):
         '''
@@ -121,3 +123,24 @@ class test_DBStorage(unittest.TestCase):
             Test to check if storage is an instance for DBStorage
         '''
         self.assertTrue(isinstance(storage, DBStorage))
+
+    def test_dbstorage_count(self):
+        ''' 
+           Test to check if count funtion works
+        '''
+        storage.reload()
+        test = storage.all("")
+        count = storage.count(None)
+        self.assertEqual(len(test), count)
+        test = storage.all("State")
+        count = storage.count(None)
+        self.assertEqual(len(test), count)
+
+    def test_dbstorage_get(self):
+        '''
+            Tests Get method for storage
+        '''
+        new = State(Name="Arizona")
+        storage.new(new)
+        firstid = list(storage.all("State").values())[0].id
+        self.assertEqual(type(storage.get("State", firstid)), State)
