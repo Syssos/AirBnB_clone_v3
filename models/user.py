@@ -6,6 +6,7 @@ from os import getenv
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
+from hashlib import md5
 
 
 class User(BaseModel, Base):
@@ -27,3 +28,13 @@ class User(BaseModel, Base):
         password = ""
         first_name = ""
         last_name = ""
+
+    @property
+    def get_pwd(self):
+        """"""
+        return self.password
+
+    @property
+    def set_pwd(self):
+        """"""
+        self.password = md5().hexdigest()
