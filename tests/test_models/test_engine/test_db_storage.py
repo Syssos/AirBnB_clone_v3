@@ -129,7 +129,7 @@ class test_DBStorage(unittest.TestCase):
            Test to check if count funtion works
         '''
         storage.reload()
-        test = storage.all("")
+        test = storage.all()
         count = storage.count(None)
         self.assertEqual(len(test), count)
         test = storage.all("State")
