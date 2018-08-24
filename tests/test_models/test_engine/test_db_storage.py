@@ -133,14 +133,14 @@ class test_DBStorage(unittest.TestCase):
         count = storage.count(None)
         self.assertEqual(len(test), count)
         test = storage.all("State")
-        count = storage.count(None)
+        count = storage.count("State")
         self.assertEqual(len(test), count)
 
     def test_dbstorage_get(self):
         '''
             Tests Get method for storage
         '''
-        new = State(Name="Arizona")
+        new = State(name="Arizona")
         storage.new(new)
         firstid = list(storage.all("State").values())[0].id
         self.assertEqual(type(storage.get("State", firstid)), State)
